@@ -1,2 +1,2 @@
 # Cpp_Code
-All the dsa algorith codes are there 
+Dsa related codes are there.
