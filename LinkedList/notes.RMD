@@ -1,0 +1,13 @@
+Where used ?
+circular lists
+hashtable implementations to deal with hashing collisionsf
+
+
+Head: first node
+Tail: last node
+Pointer : reference to another node
+Node : an object containing data and pointers
+
+COMLEXITY:
+
+

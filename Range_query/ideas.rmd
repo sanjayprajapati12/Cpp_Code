@@ -1,0 +1,14 @@
+majority element in the range :
+https://pastebin.com/qeGxT0W2
+for most frequent element use Mo's theoram
+
+
+Notes :
+
+I) sparse table not support update, and only good for indempotent function as it provide O(1) query for thrm. 
+
+Ii)  Fenwick tree is good for invertible function only. For non invertible function it's too complicated to use. It's provide O(logn) query but very easy to implement and have small constant factor. 
+
+Iii) Segtree can be used in most of the case, it's not efficient than sparse Or Fenwick, but it's super flexible.
+
+Iv) for any range query that cannot be solve in logn order, use sqrt decomposition,  eg finding highest frequency element in range.

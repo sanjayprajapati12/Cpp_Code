@@ -1,0 +1,1 @@
+{"name":"Local: lexio_smallest_string_of_size_k","url":"d:\\Programing\\C++\\Algorithms\\stack\\lexio_smallest_string_of_size_k.cpp","tests":[{"id":1643435084233,"input":"bbcaab\n3","output":"aab"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Programing\\C++\\Algorithms\\stack\\lexio_smallest_string_of_size_k.cpp","group":"local","local":true}
