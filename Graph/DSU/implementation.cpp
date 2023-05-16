@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
 struct DSU{
     vector<int> sz;
     vector<int> parent;
@@ -19,10 +20,10 @@ struct DSU{
     }
 
     int findPar(int node){
-        if(node != p[node]){
-            p[node] = findPar(p[node]);
+        if(node != parent[node]){
+            parent[node] = findPar(parent[node]);
         }
-        return p[node];
+        return parent[node];
     }
     
     void unite(int a, int b){
@@ -33,17 +34,15 @@ struct DSU{
         sz[a] += sz[b];
         parent[b] = a;
     }
-};
 
-// connected components
-void cc(int n,DSU &dsu)
-{
-    set<int> s;
-    for (int i = 1; i <=n; i++) {
-        s.insert(dsu.findPar(i));
+    int connected_component(int n){
+        set<int> s;
+        for(int i=1 ; i<=n ; i++){
+            s.insert(findPar(i));
+        }
+        return s.size();
     }
-    cout << s.size() << '\n';
-}
+};
 
 int32_t main(){
 
@@ -56,9 +55,6 @@ int32_t main(){
         dsu.unite(u,v);
     }
 
-    cc(n,dsu);
-    // for(int i = 0 ; i<=n;i++){
-    //     cout<<"i "<<dsu.parent[i]<<endl;
-    // }
+    cout<<dsu.connected_component(n)<<endl;
     return 0;
 }

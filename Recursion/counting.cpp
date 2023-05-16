@@ -5,7 +5,7 @@ void getCounting(int n) {
 
   //Base Condition
   if(n<=0)
-  return ;
+    return ;
 
 
   //subproblem or recursive call5

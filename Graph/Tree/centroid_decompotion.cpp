@@ -109,24 +109,23 @@ struct centroid {
     if (vis[v]) return 0;
     sz[v] = 1;
  
-    for (int x: graph[v]) {
-      if (x != p) {
-        sz[v] += find_size(x, v);
+    for (auto &child: graph[v]) {
+      if (child != p) {
+        sz[v] += find_size(child, v);
       }
     }
- 
+
     return sz[v];
   }
  
   int find_centroid(int v, int p, int n) {
-    for (int x: graph[v]) {
-      if (x != p) {
-        if (!vis[x] && sz[x] > n / 2) {
-          return find_centroid(x, v, n);
+    for (auto &child: graph[v]) {
+      if (child != p) {
+        if (!vis[child] && sz[child] > n / 2) {
+          return find_centroid(child, v, n);
         }
       }
     }
- 
     return v;
   }
  
@@ -136,7 +135,7 @@ struct centroid {
     int c = find_centroid(v, -1, sz[v]);
     vis[c] = true;
     par[c] = p;
- 
+
     for (int x: graph[c]) {
       if (!vis[x]) {
         init_centroid(x, c);
@@ -157,6 +156,7 @@ struct centroid {
   }
   
 };
+
 
 int32_t main(){
     int n ;cin>>n;

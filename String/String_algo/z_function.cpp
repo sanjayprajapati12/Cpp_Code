@@ -5,11 +5,11 @@ using namespace std;
 //using namespace __gnu_pbds;//
 
 
-#ifndef ONLINE_JUDGE
-#include "debug.h"
-#else
-#define debug(...)
-#endif
+// #ifndef ONLINE_JUDGE
+// #include "debug.h"
+// #else
+// #define debug(...)
+// #endif
 
 
 #define int long long int
@@ -65,100 +65,45 @@ template<class A>istream&operator>>(istream&in,vector<A>&a){for(A &i:a)in>>i;ret
 int gcd(int a,int b){
      return (b==0) ?  a : gcd(b,a%b);
 }
-    
+
+vector<int> z_function(string s) {
+    int n = s.size();
+    vector<int> z(n);
+    int l = 0, r = 0;
+    for(int i = 1; i < n; i++) {
+        if(i < r) {
+            z[i] = min(r - i, z[i - l]);
+        }
+        while(s[z[i]] == s[i + z[i]]) {
+            z[i]++;
+        }
+        if(i + z[i] > r) {
+            l = i;
+            r = i + z[i];
+        }
+    }
+    return z;
+}
+
+// The problem is: find all occurrences of the pattern  p inside the text  t .
+int all_occurrence(string text , string pattern){
+    string s = pattern ; 
+    s += "#";
+    s += text;
+    vector<int> z = z_function(s);
+    int ans = 0 ; 
+    int n = text.length();
+    int m = pattern.size();
+    for(int i=m ; i<z.size() ; i++){
+        ans += (z[i]==m);
+    }
+    return ans;
+}
+
 int32_t main(){
     fastio
-    //cout<<setprecision(6)<<fixed<<ans<<endl;//
-    //freopen( "input.txt" , "r" , stdin );//
-    //freopen( "output.txt" , "w" , stdout );//
-    
-    // jaldi_karenge_jaldbaazi_nahi
-    int t=1;
-    // cin>>t;
-    while(t--){
-        
-
-        int n,q;
-        cin>>n>>q;
-        vi a(n);
-        cin>>a;
-        vector<pair<pair<int,int>,int>> qq;
-        fo(i,0,q-1){
-            int l,r;
-            cin>>l>>r;
-            l--;
-            r--;
-            qq.push_back(make_pair(make_pair(l,r),i));
-        }
-
-        
-		
-		int block_size = sqrtl(n);
-
-        sort(all(qq),[&](auto a,auto b){
-            if(a.first.first/block_size != b.first.first/block_size){
-                return a.first.first/block_size < b.first.first/block_size;
-            }
-            else{
-                return a.first.second < b.first.second;
-            }
-        });
-
-        const int N = 1e6+10; // need to change
-        vector<int> mp(N,0);
-		
-        int global_ans = 0 ;
-
-		// change 
-        auto add = [&](int i){
-            global_ans -= (mp[a[i]]*mp[a[i]]*a[i]);
-            mp[a[i]]++;
-            global_ans += (mp[a[i]]*mp[a[i]]*a[i]);
-        };
-
-		// change
-        auto remove = [&](int i){
-            global_ans -= (mp[a[i]]*mp[a[i]]*a[i]);
-            mp[a[i]]--;
-            global_ans += (mp[a[i]]*mp[a[i]]*a[i]);
-        };
-
-        vi ans(q);
-        int mo_left = 0 ;
-        int mo_right = -1;
-
-        fo(i,0,q-1){
-            int l = qq[i].first.first;
-            int r = qq[i].first.second;
-            int id = qq[i].second;
-
-            while(mo_right>r){
-                remove(mo_right);
-                mo_right--;
-            }
-
-            while(mo_left>l){
-                mo_left--;
-                add(mo_left);
-            }
-            
-            while(mo_right<r){
-                mo_right++;
-                add(mo_right);
-            }
-
-            while(mo_left<l){
-                remove(mo_left);
-                mo_left++;
-            }
-
-            ans[id] = global_ans;
-        }
-
-        for(auto &x:ans){
-            cout<<x<<endl;
-        }
-
-    }
+    string text , pattern ; 
+    cin>> text >> pattern ; 
+    cout<<all_occurrence(text,pattern)<<endl;
     return 0;
 }

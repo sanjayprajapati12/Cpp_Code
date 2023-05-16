@@ -17,7 +17,7 @@ struct segTree{
     int n;
     segTree(int _n){
         n = _n;
-        tree.resize(4*n);
+        tree.resize(4*n,CONST);
     }
 
     void pull(int v){

@@ -16,7 +16,7 @@ struct segTree{
 
     segTree(int sz){
         n = sz;
-        tree.resize(4*n+1,0); // change if needed
+        tree.resize(4*n+1,CONST); // change if needed
         lazy.resize(4*n+1,lazy_CONST);
     }
 

@@ -21,7 +21,6 @@ int32_t main(){
         addEdge(a,b,graph);
     }
     vector<pair<int,int>> bridge;
-    set<int> ap;
     // dp[x] -> back-edges passes over x and its parent
     vector<int> dp(n+1,0),lvl(n+1,-1);
     function<void(int,int)> dfs = [&](int p,int v){
@@ -44,8 +43,6 @@ int32_t main(){
         // cout<<"node "<<v<<" "<<dp[v]<<" "<<lvl[v]<<endl;
         if(lvl[v]>1 && dp[v]==0){
             bridge.push_back({v,p});
-            ap.insert(v);
-            ap.insert(p);
         }
     };
 
@@ -62,11 +59,6 @@ int32_t main(){
         cout<<x.first<<" "<<x.second<<endl;
     }
 
-    cout<<"Articulation point :"<<endl;
-    for(auto &x:ap){
-        cout<<x<<" ";
-    }
-    cout<<endl;
     return 0;
 }
 
